@@ -1,1 +1,43 @@
 
+# weatherapi_
+<html>
+ <head>
+  <script>
+    function getData()
+    {
+     var city=document.getElementById("c1").value;
+     var key="9f9225a409901f5656ce379daa1def7b";
+     var url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
+     
+     
+     fetch(url)
+     .then(function(response)
+     {
+        return response.json();
+     })
+     .then(function(data)
+     {
+        console.log(data);
+        var n=data.name;
+        var t=data.main.temp;
+        var h=data.main.humidity;
+        var w=data.weather[0].description;
+        document.getElementById("i1").innerHTML="NAME: "+n+"<br>"+"TEMPERATURE: "+t+"<br>"+"HUMIDITY: "+h+"<br>"+"WEATHER: "+w;
+     })
+     .catch(function(error)
+     {
+        alert("Invalid City Name");    
+     })
+    }
+  </script>
+    <link rel="stylesheet" href="api.css">
+ </head>
+ <body>
+    <div class="gridcontainer">
+        <img src="1.jpg" class="grid">
+  <input type="text" value="" placeholder="Enter City Name" id="c1" class="grid">
+  <button onclick="getData()" class="grid">Get Weather Data</button>
+  <h1 id="i1"></h1>
+    </div>
+ </body>
+</html>
